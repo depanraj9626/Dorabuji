@@ -23,6 +23,7 @@
             justify-content: center;
             overflow-x: hidden;
             padding: 20px;
+            perspective: 1000px;
         }
         
         .container {
@@ -37,6 +38,8 @@
             position: relative;
             overflow: hidden;
             border: 1px solid rgba(0, 123, 255, 0.3);
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
         }
         
         h1 {
@@ -45,11 +48,13 @@
             margin-bottom: 20px;
             text-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
             letter-spacing: 2px;
+            transform: translateZ(30px);
         }
         
         .section {
             display: none;
             animation: fadeIn 1s;
+            transform-style: preserve-3d;
         }
         
         .active {
@@ -58,6 +63,7 @@
         
         .cake-container {
             margin: 30px 0;
+            transform-style: preserve-3d;
         }
         
         .cake-img {
@@ -66,10 +72,11 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5),
                         0 0 20px rgba(0, 123, 255, 0.5);
             transition: transform 0.5s, box-shadow 0.5s;
+            transform: translateZ(20px);
         }
         
         .cake-img:hover {
-            transform: scale(1.05) rotate(2deg);
+            transform: scale(1.05) rotate(2deg) translateZ(30px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7),
                         0 0 25px rgba(0, 123, 255, 0.7);
         }
@@ -82,12 +89,13 @@
             font-weight: bold;
             letter-spacing: 3px;
             animation: pulse 2s infinite;
+            transform: translateZ(25px);
         }
         
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            0% { transform: scale(1) translateZ(25px); }
+            50% { transform: scale(1.05) translateZ(30px); }
+            100% { transform: scale(1) translateZ(25px); }
         }
         
         .btn {
@@ -102,20 +110,25 @@
             transition: all 0.4s;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             letter-spacing: 1px;
+            transform: translateZ(20px);
         }
         
         .btn:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) translateZ(25px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
             background: linear-gradient(to right, #0056b3, #007bff);
         }
         
         .btn:active {
-            transform: translateY(0);
+            transform: translateY(0) translateZ(20px);
         }
         
         .btn-exit {
-            background: linear-gradient(to right, #1a1a1a, #333333);
+            background: linear-gradient(to right, #ff4d4d, #cc0000);
+        }
+        
+        .btn-exit:hover {
+            background: linear-gradient(to right, #cc0000, #ff4d4d);
         }
         
         .nav-buttons {
@@ -124,6 +137,7 @@
             flex-wrap: wrap;
             gap: 15px;
             margin-top: 25px;
+            transform: translateZ(20px);
         }
         
         .video-container {
@@ -139,6 +153,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transform: translateZ(20px);
         }
         
         .video-container video {
@@ -149,6 +164,7 @@
             height: 100%;
             border-radius: 15px;
             outline: none;
+            transform: translateZ(15px);
         }
         
         .poem {
@@ -159,6 +175,7 @@
             text-align: center;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(0, 123, 255, 0.2);
+            transform: translateZ(20px);
         }
         
         .poem h3 {
@@ -185,6 +202,7 @@
             background: rgba(0, 0, 0, 0.3);
             border-radius: 15px;
             border-left: 4px solid #007bff;
+            transform: translateZ(20px);
         }
         
         .message {
@@ -192,12 +210,14 @@
             line-height: 1.7;
             margin: 30px 0;
             color: #e6f2ff;
+            transform: translateZ(20px);
         }
         
         .footer {
             margin-top: 40px;
             color: #a0c4ff;
             font-size: 1rem;
+            transform: translateZ(20px);
         }
         
         .back-btn {
@@ -217,17 +237,19 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             transition: all 0.3s;
             z-index: 100;
+            transform: translateZ(30px);
         }
         
         .back-btn:hover {
             background: #007bff;
-            transform: translateX(-3px);
+            transform: translateX(-3px) translateZ(35px);
         }
         
         .progress-indicator {
             display: flex;
             justify-content: center;
             margin: 20px 0;
+            transform: translateZ(20px);
         }
         
         .progress-dot {
@@ -237,11 +259,12 @@
             background: #0056b3;
             margin: 0 8px;
             transition: all 0.3s;
+            transform: translateZ(15px);
         }
         
         .progress-dot.active {
             background: #007bff;
-            transform: scale(1.5);
+            transform: scale(1.5) translateZ(25px);
         }
         
         .decoration {
@@ -257,6 +280,7 @@
             opacity: 0.1;
             top: -50px;
             right: -50px;
+            animation: float 15s infinite ease-in-out;
         }
         
         .decoration.square {
@@ -267,11 +291,17 @@
             bottom: -50px;
             left: -50px;
             transform: rotate(45deg);
+            animation: float 12s infinite ease-in-out reverse;
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(30px) rotateX(10deg); }
+            to { opacity: 1; transform: translateY(0) rotateX(0); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
         }
         
         @media (max-width: 768px) {
@@ -359,13 +389,98 @@
             margin-bottom: 15px;
             color: #007bff;
         }
+        
+        /* 3D Effects */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translate(0, 0px) rotateY(0deg); }
+            50% { transform: translate(0, 15px) rotateY(5deg); }
+            100% { transform: translate(0, 0px) rotateY(0deg); }
+        }
+        
+        .rotate-3d {
+            animation: rotate3d 15s infinite linear;
+        }
+        
+        @keyframes rotate3d {
+            0% { transform: perspective(1000px) rotateY(0deg); }
+            100% { transform: perspective(1000px) rotateY(360deg); }
+        }
+        
+        /* Exit screen */
+        .exit-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #000000 0%, #0a1929 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            transform: scale(0);
+            opacity: 0;
+            transition: transform 0.8s, opacity 0.8s;
+        }
+        
+        .exit-screen.active {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .exit-screen h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #007bff;
+            text-shadow: 0 0 20px rgba(0, 123, 255, 0.7);
+        }
+        
+        .exit-screen p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+        
+        .exit-screen .btn {
+            margin: 10px;
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0.8;
+            border-radius: 0;
+            z-index: 1000;
+            animation: confetti-fall 5s linear forwards;
+        }
+        
+        @keyframes confetti-fall {
+            0% { 
+                transform: translateY(-10px) rotate(0deg) translateZ(50px);
+                opacity: 1;
+            }
+            100% { 
+                transform: translateY(100vh) rotate(720deg) translateZ(50px);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="decoration circle"></div>
     <div class="decoration square"></div>
     
-    <div class="container">
+    <div class="container floating">
         <div class="progress-indicator">
             <div class="progress-dot active" id="dot1"></div>
             <div class="progress-dot" id="dot2"></div>
@@ -405,10 +520,9 @@
             <div class="video-container">
                 <!-- Offline video tag with placeholder for user to add their own video -->
                 <video width="320" height="240" controls>
-  <source src="/a.mp4" type="video/mp4">
-
-Your browser does not support the video tag.
-</video>
+                    <source src="index.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
                 <div class="video-placeholder" style="display: none;">
                     <i class="fas fa-video-slash"></i>
                     <p>Video not available. Add your own video file named "birthday_video.mp4" in the same folder.</p>
@@ -432,32 +546,29 @@ Your browser does not support the video tag.
             <div class="tamil-poem">
                 <h3 style="color:#007bff; margin-bottom: 20px;">🎂 என்னுயிர் தோழிக்கு பிறந்தநாள் வாழ்த்து 🎂</h3>
                 <p>
-
                     என் அழுகையின் பின்னால் ஆயிரம் பேர்
-                     இருக்கலாம் ஆனால் என் சிரிப்பின் பின்னால் 
-                     நிச்சயம் என் தோழி இருப்பாள் ❤️ <br> <br>
+                    இருக்கலாம் ஆனால் என் சிரிப்பின் பின்னால் 
+                    நிச்சயம் என் தோழி இருப்பாள் ❤️ <br> <br>
 
- அறிமுகம் இல்லாமல் வந்தோம் அடிக்கடி பேசிக்கொண்டோம்.
-  உறவுகளுக்கு மேலே, உயிர் ஆனோம். காலம் கடந்து சென்றாலும்
-   கடைசி வரை தொடர வேண்டும் நம் நட்பு❤️  <br> <br>
+                    அறிமுகம் இல்லாமல் வந்தோம் அடிக்கடி பேசிக்கொண்டோம்.
+                    உறவுகளுக்கு மேலே, உயிர் ஆனோம். காலம் கடந்து சென்றாலும்
+                    கடைசி வரை தொடர வேண்டும் நம் நட்பு❤️  <br> <br>
 
+                    இரவு என்பது விடியும் வரை
+                    நெருப்பு என்பது அனைவும் வரை
+                    கனவு என்பது தெளியும் வரை
+                    நட்பு என்பது
+                    சாகும் வரை ❤️ <br> <br>
 
-
- இரவு என்பது விடியும் வரை
-நெருப்பு என்பது அனைவும் வரை
-கனவு என்பது தெளியும் வரை
-நட்பு என்பது
-சாகும் வரை ❤️ <br> <br>
-
- ஒரு நாள் எனக்கு
-மரணம் வரும்...
-அன்று நீ
-என்னை பார்த்து
-கண்ணீர் விடாதே..!!
-எழுந்தாலும்
-எழுந்து விடுவேன்
-"உன் கண்ணீரை"
-துடைக்க..!! ❤️ 
+                    ஒரு நாள் எனக்கு
+                    மரணம் வரும்...
+                    அன்று நீ
+                    என்னை பார்த்து
+                    கண்ணீர் விடாதே..!!
+                    எழுந்தாலும்
+                    எழுந்து விடுவேன்
+                    "உன் கண்ணீரை"
+                    துடைக்க..!! ❤️ 
                 </p>
             </div>
             <div class="nav-buttons">
@@ -474,8 +585,8 @@ Your browser does not support the video tag.
         <div class="section" id="section4">
             <div class="message">
                 <p> ❤️ On Your special day  </p>
-                <p> ❤️ friendship finsed  that  ends<br>
-                ❤️ Like conversation  21-09-2005 stop  <br>
+                <p> ❤️ friendship finds that ends<br>
+                ❤️ Like conversation 21-09-2005 stop  <br>
                 ❤️ happy to end of the life <br>
                 ❤️ good bye buji</p>
             </div>
@@ -487,7 +598,7 @@ Your browser does not support the video tag.
                 <button class="btn" onclick="createConfetti()">
                     <i class="fas fa-birthday-cake"></i> Celebrate!
                 </button>
-                <button class="btn btn-exit" onclick="exitWebsite()">
+                <button class="btn btn-exit" onclick="showExitScreen()">
                     Exit <i class="fas fa-sign-out-alt"></i>
                 </button>
             </div>
@@ -495,6 +606,20 @@ Your browser does not support the video tag.
         
         <div class="footer">
             <p>Made with ❤️ for Dora Buji's Special Day</p>
+        </div>
+    </div>
+    
+    <!-- Exit Screen -->
+    <div class="exit-screen" id="exitScreen">
+        <h1 class="rotate-3d">Thank You!</h1>
+        <p>Thanks for celebrating Dora Buji's birthday with us. Wishing you all the best!</p>
+        <div>
+            <button class="btn" onclick="hideExitScreen()">
+                <i class="fas fa-arrow-left"></i> Back to Celebration
+            </button>
+            <button class="btn btn-exit" onclick="reallyExit()">
+                Really Exit <i class="fas fa-sign-out-alt"></i>
+            </button>
         </div>
     </div>
     
@@ -579,18 +704,16 @@ Your browser does not support the video tag.
         
         // Create confetti effect
         function createConfetti() {
-            const colors = ['#007bff', '#0056b3', '#003d82', '#002852', '#001329'];
+            const colors = ['#007bff', '#0056b3', '#ff4d4d', '#ffdd00', '#00cc00'];
             
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 150; i++) {
                 const confetti = document.createElement('div');
-                confetti.style.position = 'fixed';
-                confetti.style.width = (Math.random() * 10 + 5) + 'px';
-                confetti.style.height = (Math.random() * 10 + 5) + 'px';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.className = 'confetti';
                 confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.top = '-20px';
-                confetti.style.borderRadius = '50%';
-                confetti.style.animation = `confetti-fall ${Math.random() * 3 + 2}s linear forwards`;
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = (Math.random() * 15 + 5) + 'px';
+                confetti.style.height = (Math.random() * 15 + 5) + 'px';
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
                 
                 document.body.appendChild(confetti);
                 
@@ -600,34 +723,44 @@ Your browser does not support the video tag.
                 }, 5000);
             }
             
-            // Add confetti animation to CSS
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes confetti-fall {
-                    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-                    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-                }
-            `;
-            document.head.appendChild(style);
-            
-            // Show notification instead of alert
+            // Show notification
             showNotification("🎉 Happy Birthday Dora Buji! 🎉", "Wishing you all the best on your special day!");
         }
         
-        // Exit website function
-        function exitWebsite() {
-            const confirmExit = confirm("Are you sure you want to exit the birthday website?");
-            if (confirmExit) {
-                document.body.innerHTML = `
-                <div style="display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column; background: linear-gradient(135deg, #000000 0%, #0a1929 100%); color: #007bff; text-align: center; padding: 20px;">
-                    <h1 style="font-size: 2.5rem; margin-bottom: 20px; text-shadow: 0 0 10px rgba(0, 123, 255, 0.5);">Thank you for celebrating with us!</h1>
-                    <p style="font-size: 1.5rem; margin-bottom: 30px;">Wishing Dora Buji a wonderful birthday!</p>
-                    <button onclick="location.reload()" style="background: linear-gradient(to right, #007bff, #0056b3); color: white; border: none; padding: 12px 30px; font-size: 1.2rem; border-radius: 50px; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
-                        Return to Website
-                    </button>
-                </div>`;
-            }
+        // Show exit screen
+        function showExitScreen() {
+            document.getElementById('exitScreen').classList.add('active');
+            createConfetti();
         }
+        
+        // Hide exit screen
+        function hideExitScreen() {
+            document.getElementById('exitScreen').classList.remove('active');
+        }
+        
+        // Really exit the website
+        function reallyExit() {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                window.close();
+                // If window.close doesn't work (due to browser restrictions)
+                alert("Thank you for celebrating! This page can now be closed.");
+            }, 1000);
+        }
+        
+        // Mouse move 3D effect
+        document.addEventListener('mousemove', function(e) {
+            const container = document.querySelector('.container');
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            container.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+        
+        // Reset container position when mouse leaves
+        document.addEventListener('mouseleave', function() {
+            const container = document.querySelector('.container');
+            container.style.transform = 'rotateY(0deg) rotateX(0deg)';
+        });
         
         // Check if video is available
         window.addEventListener('load', function() {
